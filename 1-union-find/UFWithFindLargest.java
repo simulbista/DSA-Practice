@@ -42,7 +42,7 @@ public class UFWithFindLargest {
     }
 
     // find the largest item in the component
-    private int find(int p) {
+    public int find(int p) {
         return large[root(p)];
     }
 
