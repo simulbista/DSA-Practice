@@ -33,26 +33,36 @@
 //Try to come up with as many solutions as you can. There are at least three different ways to solve this problem.
 //Could you do it in-place with O(1) extra space?
 public class RotateArray {
-
+    //logic: [1,2,3,4,5,6,7] -> k=3 -> [5,6,7,1,2,3,4]
+    // reverse the entire array: [7,6,5,4,3,2,1]
+    //reverse part 1 of the array upto k-1th item i.e. [7,6,5] -> [5,6,7]
+    //reverse part 2 of the array i.e from kth item to the last item i.e. [4,3,2,1] -> [1,2,3,4]
+    //result: [5,6,7,1,2,3,4]
     public static void rotateArray(int[] nums, int k) {
-        int temp;
-        while(k>0){
-            temp = nums[nums.length-1];
-            for(int i = nums.length-1;i>0;i--){
-                nums[i] = nums[i-1];
-                if(i == 1){
-                    nums[i-1] = temp;
-                    k--;
-                }
-            }
+        k = k%nums.length; // (if k is greater than the nums length)if k=10, we want k=10%7=3rd index, hence we use mod
+//        step1: reverse the entire array
+        reverse(nums,0,nums.length-1);
+//        step2: reverse the first part of the array
+        reverse(nums,0,k-1);
+//        step3: reverse the second part of the array
+        reverse(nums,k,nums.length-1);
+    }
+
+    public static void reverse(int[] nums, int start, int end){
+        while(start <end){
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start ++;
+            end --;
         }
     }
 
     public static void main(String[] args){
-//        int[] nums = {1,2,3,4,5,6,7};
-//        int k = 3;
-        int[] nums = {-1,-100,3,99};
-        int k = 2;
+        int[] nums = {1,2,3,4,5,6,7};
+        int k = 3;
+//        int[] nums = {-1,-100,3,99};
+//        int k = 2;
 
         rotateArray(nums,k);
         for(int n : nums){
