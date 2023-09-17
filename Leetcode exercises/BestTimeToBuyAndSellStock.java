@@ -29,7 +29,7 @@
 public class BestTimeToBuyAndSellStock {
 
     public static int maxProfit(int[] prices){
-        int l=0, r=0;   //l = buy, r = sell
+        int l=0, r=1;   //l = buy, r = sell
         int maxP = 0, profit =0;
         while(r<prices.length){
             //profitable?
