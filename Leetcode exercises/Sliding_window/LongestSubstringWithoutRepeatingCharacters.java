@@ -1,4 +1,4 @@
-package Two_pointers;
+package Sliding_window;
 
 //3. Longest Substring Without Repeating Characters (Medium)
 
@@ -39,8 +39,8 @@ public class LongestSubstringWithoutRepeatingCharacters {
         Set<Character> mySet = new HashSet<>();
 
         for(int r=0;r<s.length();r++){
-//          main logic which i was confused when i tried by myself: keep on increasing l index until you reach
-            //the character which is the duplicate and remove it from the hashset
+//          main logic which i was confused when i tried by myself: in the sliding window, keep on increasing l index
+//          until you reach the character which is the duplicate and remove it from the hashset
             while(mySet.contains(s.charAt(r))){
                 mySet.remove(s.charAt(l));
                 l++;

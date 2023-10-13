@@ -1,4 +1,4 @@
-package Two_pointers;
+package Sliding_window;
 
 //209. Minimum Size Subarray Sum (Medium)
 
