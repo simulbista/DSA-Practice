@@ -42,9 +42,6 @@ package Array_String;//12. Integer to Roman (Medium)
 //
 //1 <= num <= 3999
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class IntegerToRoman {
     public static String intToRoman(int num) {
         if (num < 1 || num > 3999) return "";
