@@ -1,6 +1,6 @@
 package HashMap;
 
-//219. Contains Duplicate II
+//219. Contains Duplicate II easy
 
 import java.util.HashSet;
 import java.util.Set;
