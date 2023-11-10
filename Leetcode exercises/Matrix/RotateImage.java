@@ -1,4 +1,4 @@
-package matrix;
+package Matrix;
 
 //48. Rotate Image (Medium)
 

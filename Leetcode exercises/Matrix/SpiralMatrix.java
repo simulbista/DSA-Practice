@@ -1,4 +1,4 @@
-package matrix;
+package Matrix;
 //54. Spiral Matrix (Medium)
 
 //Given an m x n matrix, return all elements of the matrix in spiral order.

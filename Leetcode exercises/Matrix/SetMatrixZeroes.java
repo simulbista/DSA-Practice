@@ -1,4 +1,4 @@
-package matrix;
+package Matrix;
 
 //73. Set Matrix Zeroes (Medium)
 

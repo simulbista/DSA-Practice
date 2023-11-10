@@ -1,4 +1,4 @@
-package matrix;
+package Matrix;
 
 //289. Game of Life (Medium)
 

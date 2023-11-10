@@ -1,4 +1,4 @@
-package matrix;
+package Matrix;
 
 //36. Valid Sudoku (Medium)
 
