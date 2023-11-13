@@ -1,12 +1,12 @@
 package Intervals;
 
-//57. Insert Interval
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi] represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
+//57. Insert Interval (Medium)
+
+//You are given an array of non-overlapping intervals where intervals[i] = [starti, endi] represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
 //
 //Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
 //
@@ -44,7 +44,7 @@ public class InsertInterval {
             i++;
         }
 
-        //now we know that we have already added all the preceeding elements from intervals in the result
+        //now we know that we have already added all the preceding elements from intervals in the result
         //so at this ith position, we know there is an overlap, just need to determine till which point
         // Merge overlapping intervals
         while (i < intervals.length && newInterval[1] >= intervals[i][0]) {
@@ -56,7 +56,7 @@ public class InsertInterval {
         // Add merged newInterval
         result.add(newInterval);
 
-        // Add remaining intervals
+        // Add remaining non overlapping intervals
         while (i < intervals.length) {
             result.add(intervals[i]);
             i++;
