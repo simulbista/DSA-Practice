@@ -77,6 +77,11 @@ public class AddTwoNumbers {
         l2.next.next = new ListNode(4);
 
         l3 = addTwoNumbers(l1,l2);
+        while(l3!=null){
+            System.out.print(" -> ");
+            System.out.print(l3.val);
+            l3 = l3.next;
+        }
     }
 
 }
