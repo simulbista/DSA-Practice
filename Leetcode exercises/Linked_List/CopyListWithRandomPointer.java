@@ -2,6 +2,9 @@ package Linked_List;
 
 //138. Copy List with Random Pointer (Medium)
 
+import java.util.HashMap;
+import java.util.Map;
+
 //A linked list of length n is given such that each node contains an additional random pointer, which could point to any node in the list, or null.
 //
 //Construct a deep copy of the list. The deep copy should consist of exactly n brand new nodes, where each new node has its value set to the value of its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.
@@ -55,23 +58,33 @@ public class CopyListWithRandomPointer {
         }
     }
     public static Node copyRandomList(Node head) {
-        //copying first value (head node)
-        Node currentHead = new Node(head.val);
-        Node current = currentHead;
-        while(head!=null){
-            if(head.next!=null) current.next = new Node(head.next.val);
+        Map<Node,Node> nodeMap = new HashMap<>();
+
+        Node current = head;
+        Node copy;
+
+        //first pass: to create the new nodes (no connection) and the hashmap link
+        while(current!=null){
+            copy = new Node(current.val);
+            nodeMap.put(current,copy);
             current = current.next;
-            head = head.next;
         }
 
-        //copying random values
-        //setting random value for the head node
-        if(head.random == null) currentHead.random = null;
-        while(head!=null){
-
+        //second pass: to connect the nodes and then the random pointer with the help of the hashmap link
+        current = head;
+        while(current!=null){
+            copy = nodeMap.get(current);
+            copy.next = nodeMap.get(current.next);
+            if(current.random == null){
+                copy.random = null;
+            }else{
+                copy.random = nodeMap.get(current.random);
+            }
+            current = current.next;
+            copy = copy.next;
         }
 
-        return currentHead;
+        return nodeMap.get(head);
     }
 
     public static void main(String[] args) {
