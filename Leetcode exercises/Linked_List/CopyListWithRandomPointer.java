@@ -63,7 +63,7 @@ public class CopyListWithRandomPointer {
         Node current = head;
         Node copy;
 
-        //first pass: to create the new nodes (no connection) and the hashmap link
+        //first pass: to create the new copy nodes mapped with the original nodes in the hashmap
         while(current!=null){
             copy = new Node(current.val);
             nodeMap.put(current,copy);
