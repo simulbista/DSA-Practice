@@ -46,29 +46,35 @@ public class ReverseLinkedListII {
         }
     }
     public static ListNode reverseBetween(ListNode head, int left, int right) {
-        Stack<ListNode> stack = new Stack<>();
-        int count = 1;
-
+        ListNode dummy = new ListNode(0, head);
+        ListNode leftPrev = dummy;
         ListNode current = head;
 
-        //first pass: to put the nodes to be reversed in the stack
-        while(current!=null){
-            while(count>=left && count<=right){
-                stack.push(new ListNode(current.val));
-                count++;
-            }
-
-            if(count>right){
-                while(!stack.isEmpty()){
-                    current.next = stack.pop();
-                    current = current.next;
-                }
-            }
-            current = current.next;
-            count++;
+        //1st part: reach the left node (i.e. l-1 iteration)
+        for(int i=0; i<left-1;i++){
+           leftPrev =  current;
+           current = current.next;
         }
 
-        return head;
+        //2nd part: reach the node after right(traversing r-l+1 times) and in the process reverse the link by breaking the older links
+        ListNode prev = null;
+        ListNode tempNext;
+        for(int i=0;i<right-left+1;i++){
+            tempNext = current.next;
+            //since current.next gets assigned as prev which will alter your current in the last step of this iteration, so we store it in temp to retain its state
+            current.next = prev;
+            prev = current;
+            current = tempNext;
+        }
+
+
+        //3rd part: connect the unconnected nodes: i.e. the reversed chain with the unreversed nodes
+            //connecting last node of the reversed part to the first node after the reverse chain
+        leftPrev.next.next = current;
+            //connecting last node of the node before the reversed part to the first node of the reversed chain
+        leftPrev.next = prev;
+
+        return dummy.next;
     }
 
     public static void main(String[] args) {
