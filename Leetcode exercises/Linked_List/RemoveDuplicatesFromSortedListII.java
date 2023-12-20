@@ -49,7 +49,7 @@ public class RemoveDuplicatesFromSortedListII {
             while(current!=null){
 
                 if(current.next!=null && current.val == current.next.val){
-                    while(current.val==current.next.val){
+                    while(current.next!=null && current.val==current.next.val){
                         current = current.next;
                     }
                     prev.next = current.next;
