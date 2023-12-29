@@ -39,25 +39,33 @@ public class PartitionList {
         }
     }
     public static ListNode partition(ListNode head, int x) {
-        //find the first larger no. than x and mark it as the biggerhead
+        //logic - me are creating 2 linked lists (1 more nodes less than x) and the other for nodes more or equal to x
         //traverse the list - if item is less than x then connect it with smaller ll
         //else connect it with greater ll.
 
         //at the end. connect the end of the smaller ll to the marked head of the bigger ll.
 
-        ListNode smallerHead,greaterHead;
-        ListNode smallerCurrent, greaterCurrent;
-
-        head.val<x?smallerHead = head:greaterHead = head;
-
+        ListNode headLess = new ListNode(0);
+        ListNode headGreater = new ListNode(0);
+        ListNode currentLess = headLess;
+        ListNode currentGreater = headGreater;
         ListNode current = head;
+
+        // head.val<x?smallerHead = head:greaterHead = head;
 
         while(current!=null){
             if(current.val<x) {
-                smallerCurrent.val = current.val;
-
+                currentLess.next = new ListNode(current.val);
+                currentLess = currentLess.next;
+            }else{
+                currentGreater.next = new ListNode(current.val);
+                currentGreater = currentGreater.next;
             }
+            current = current.next;
         }
+        currentLess.next = headGreater.next;
+
+        return headLess.next;
     }
 
     public static void main(String[] args) {
