@@ -39,33 +39,56 @@ public class PartitionList {
         }
     }
     public static ListNode partition(ListNode head, int x) {
-        //logic - me are creating 2 linked lists (1 more nodes less than x) and the other for nodes more or equal to x
+        //logic - me are creating 2 sub linked lists (1 more nodes less than x) and the other for nodes more or equal to x
         //traverse the list - if item is less than x then connect it with smaller ll
         //else connect it with greater ll.
 
         //at the end. connect the end of the smaller ll to the marked head of the bigger ll.
 
-        ListNode headLess = new ListNode(0);
-        ListNode headGreater = new ListNode(0);
-        ListNode currentLess = headLess;
-        ListNode currentGreater = headGreater;
-        ListNode current = head;
+        //dummy nodes
+        ListNode left = new ListNode(0);
+        ListNode right = new ListNode(0);
 
-        // head.val<x?smallerHead = head:greaterHead = head;
+        ListNode leftTail = left;
+        ListNode rightTail = right;
 
-        while(current!=null){
-            if(current.val<x) {
-                currentLess.next = new ListNode(current.val);
-                currentLess = currentLess.next;
+        while(head!=null){
+            if(head.val <x){
+                leftTail.next = head;
+                leftTail = leftTail.next;
             }else{
-                currentGreater.next = new ListNode(current.val);
-                currentGreater = currentGreater.next;
+                rightTail.next = head;
+                rightTail = rightTail.next;
             }
-            current = current.next;
+            head = head.next;
         }
-        currentLess.next = headGreater.next;
+        leftTail.next = right.next;
+        //since the lastnode might be pointing to some other node in the original list, we make it null
+        //in this example: 5 is pointing to 2 in the original LL
+        rightTail.next = null;
 
-        return headLess.next;
+        return left.next;
+
+
+//        ListNode headLess = new ListNode(0);
+//        ListNode headGreater = new ListNode(0);
+//        ListNode currentLess = headLess;
+//        ListNode currentGreater = headGreater;
+//        ListNode current = head;
+
+//        while(current!=null){
+//            if(current.val<x) {
+//                currentLess.next = new ListNode(current.val);
+//                currentLess = currentLess.next;
+//            }else{
+//                currentGreater.next = new ListNode(current.val);
+//                currentGreater = currentGreater.next;
+//            }
+//            current = current.next;
+//        }
+//        currentLess.next = headGreater.next;
+//
+//        return headLess.next;
     }
 
     public static void main(String[] args) {
