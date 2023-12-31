@@ -83,24 +83,21 @@ public class LRUCache {
     }
 
     public void put(int key, int value) {
+        //if the key-value already exists then we remove the existing node in the linkedlist
+        if(cache.containsKey(key))  remove(cache.get(key));
 
-        //step 1: remove
-            //if the key-value already exists then we remove the existing node in the linkedlist
-            if(cache.containsKey(key))  remove(cache.get(key));
+        //create the new node (with the given key-val) and make the hashmap point to it
+        // and then insert it to the linked list
+        cache.put(key, new Node(key,value));
+        insert(cache.get(key));
 
-            //if the capacity is already full, we need to remove the lru
-            //we are not inserting it to linkedlist since it has already been done above
-            if(cache.size()>this.capacity){
-                Node lru = left.next;
-                remove(lru);    //remove lru from the linked list
-                cache.remove(lru.key);  //remove it from the hashmap
-            }
-
-        //Step 2: insert
-            //Finally create the new node (with the given key-val) and make the hashmap point to it
-            // and insert it to the linkedlist to the right (inserting to right is done by the helper method - insert)
-            cache.put(key, new Node(key,value));
-            insert(cache.get(key));
+        //Note: the above insertion might create no. of nodes greater than the capacity, hence we remove it
+        //if the capacity is already full, we need to remove the lru
+        if(cache.size()>this.capacity){
+            Node lru = left.next;
+            remove(lru);    //remove lru from the linked list
+            cache.remove(lru.key);  //remove it from the hashmap
+        }
         print();
     }
 
@@ -129,6 +126,7 @@ public class LRUCache {
                 node.next = next;
         }
 
+        //to help me debug (print the linkedlist)
         public void print(){
             Node start = left;
             System.out.println("");
