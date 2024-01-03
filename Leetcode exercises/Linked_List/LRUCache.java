@@ -61,8 +61,8 @@ public class LRUCache {
     Node left,right;    //dummy nodes to point(next and prev respectively) the least recent and the most recent values
     public LRUCache(int capacity) {
         cache = new HashMap<>();
-        left = new Node(0,0);   //left = LRU (Least Recently Used)
-        right = new Node(0,0);  //right = most recently used
+        left = new Node(0,0);   //left.next = LRU (Least Recently Used)
+        right = new Node(0,0);  //right.prev = most recently used
         left.next = right;
         right.prev = left;
 
@@ -83,15 +83,17 @@ public class LRUCache {
     }
 
     public void put(int key, int value) {
-        //if the key-value already exists then we remove the existing node in the linkedlist
+        //if the key-value already exists then we remove the existing node from the linkedlist
         if(cache.containsKey(key))  remove(cache.get(key));
 
         //create the new node (with the given key-val) and make the hashmap point to it
         // and then insert it to the linked list
+        //Note: if the key is in the cache already, the following wont add a duplicate key-value pair to the cache
+        //instead: it will replace the older pair with the new one (hence maintaining unique keys in the map)
         cache.put(key, new Node(key,value));
         insert(cache.get(key));
 
-        //Note: the above insertion might create no. of nodes greater than the capacity, hence we remove it
+        //Note: the above insertion might create no. of nodes greater than the capacity (for new value insertions to the cache map), hence we remove it
         //if the capacity is already full, we need to remove the lru
         if(cache.size()>this.capacity){
             Node lru = left.next;
